@@ -1,8 +1,8 @@
 const database = {
     tables: {},
-    createTable (commandDML){
-        let tableName  = commandDML.split(' ',3)[2].trim();//
-        let columnsArray  = commandDML.match(/\(.+/)[0].replace('(','').replace(')','').split(','); 
+    createTable (commandDDL){
+        let tableName  = commandDDL.split(' ',3)[2].trim();//
+        let columnsArray  = commandDDL.match(/\(.+/)[0].replace('(','').replace(')','').split(','); 
         let columns       = {};
         for (i = 0; i < columnsArray.length; i++) {
             columns[columnsArray[i].trim().split(' ',2)[0]] = columnsArray[i].trim().split(' ',2)[1];
@@ -13,9 +13,9 @@ const database = {
 
         console.log(JSON.stringify(database, null, '    '));
     },
-    execute (commandDML){
-            if (commandDML.startsWith('create')) {
-                this.createTable(commandDML);
+    execute (commandDDL){
+            if (commandDDL.startsWith('create')) {
+                this.createTable(commandDDL);
             }
             else {
                 console.log('invalid command');

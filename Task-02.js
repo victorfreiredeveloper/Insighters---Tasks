@@ -19,8 +19,8 @@ for (i = 0; i < columnsArray.length; i++) {
 }
 const database = {
     tables: {
-        [tableName] : {
-            columns ,
+        [tableName]: {
+            columns,
             data    : [
             ]
         }

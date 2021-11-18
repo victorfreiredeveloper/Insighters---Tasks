@@ -1,3 +1,12 @@
+// Victor Freire 16/11/2021
+// Taks 02 - Objetivo: Crie dois métodos no objeto database chamados de createTable e execute. 
+// O comando createTable já foi implementado no exercício anterior, mova o código eutilize o método execute para invocar 
+// dinamicamente o método createTable
+// Instruções
+// Crie dois métodos no objeto database chamados de createTable e execute. 
+// O comando createTable já foi implementado no exercício anterior, mova o código e 
+// utilize o método execute para invocar dinamicamente o método createTable
+
 const database = {
     tables: {},
     createTable (commandDDL){

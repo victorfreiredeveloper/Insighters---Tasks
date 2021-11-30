@@ -1,5 +1,5 @@
 // Victor Freire 16/11/2021
-// Taks 03 - Objetivo: Lance uma exceção caso o comando não exista, interrompendo o fluxo de execução. 
+// Taks 04 - Objetivo: Lance uma exceção caso o comando não exista, interrompendo o fluxo de execução. 
 // Instruções
 // 1. Crie uma função construtora chamada **DatabaseError** que recebe dois parâmetros: **statement** e **message**.
 // 2. Dentro do método **execute**, caso o comando passado por parâmetro não exista, instancie a função construtora **DatabaseError**, lançando-a como um erro.

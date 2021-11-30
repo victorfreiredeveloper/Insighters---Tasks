@@ -19,10 +19,7 @@ const database = {
         for (i = 0; i < columnsArray.length; i++) {
             columns[columnsArray[i].trim().split(' ',2)[0]] = columnsArray[i].trim().split(' ',2)[1];
         }
-        // chave dinamica -- dynamic key
-        // computação em tempo real de objetos
         this.tables[tableName] = {columns, data : []};
-
         console.log(JSON.stringify(database, null, '    '));
     },
     execute (commandDDL){

@@ -1,19 +1,28 @@
+// Victor Freire 16/11/2021
+// Taks 04 - Objetivo: Lance uma exceção caso o comando não exista, interrompendo o fluxo de execução. 
+// Instruções
+// 1. Crie uma função construtora chamada **DatabaseError** que recebe dois parâmetros: **statement** e **message**.
+// 2. Dentro do método **execute**, caso o comando passado por parâmetro não exista, instancie a função construtora **DatabaseError**, lançando-a como um erro.
+// 3. Envolva a chamada para o objeto **database** em um bloco *try/catch* imprimindo a propriedade **message** do objeto **DatabaseError**.
+
+const DatabaseError = function(statement, message){
+    this.statement = statement;
+    this.message = `${message} ${statement}`;
+}
+
 const database = {
     tables: {},
     createTable (commandDDL){
-        const regexp           = /create table ([a-z]+) \((.+)\)/;
-        const parsedStatement  = commandDDL.match(regexp);
-        const tableName        = parsedStatement[1];
-        let   columnsArrray    = parsedStatement[2];
-        columnsArrray          = columnsArrray.split(", ");
-        let columns            = {};
-        for (let column of columnsArrray) {
-            column        = column.split(' ');
-            const name    = column[0];
-            const type    = column[1];
-            columns[name] = type;
+        let tableName  = commandDDL.split(' ',3)[2].trim();//
+        let columnsArray  = commandDDL.match(/\(.+/)[0].replace('(','').replace(')','').split(','); 
+        let columns       = {};
+        for (i = 0; i < columnsArray.length; i++) {
+            columns[columnsArray[i].trim().split(' ',2)[0]] = columnsArray[i].trim().split(' ',2)[1];
         }
+        // chave dinamica -- dynamic key
+        // computação em tempo real de objetos
         this.tables[tableName] = {columns, data : []};
+
         console.log(JSON.stringify(database, null, '    '));
     },
     execute (commandDDL){
@@ -21,9 +30,14 @@ const database = {
                 this.createTable(commandDDL);
             }
             else {
-                console.log('invalid command');
+                throw new DatabaseError(commandDDL, 'Syntax error:');
             }
         },
 }
 
-database.execute('create table author (id number, name string, age number, city string, state string, country string)');
+try {
+    database.execute('create table author (id number, name string, age number, city string, state string, country string)');
+    database.execute("select id, name from author");
+} catch (e) {
+    console.log(e.message);
+}

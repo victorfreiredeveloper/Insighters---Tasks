@@ -4,9 +4,10 @@ const database = {
         const regexp           = /create table ([a-z]+) \((.+)\)/;
         const parsedStatement  = commandDDL.match(regexp);
         const tableName        = parsedStatement[1];
-        let   columns          = parsedStatement[2];
-        columns                = columns.split(", ");
-        for (let column of columns) {
+        let   columnsArrray    = parsedStatement[2];
+        columnsArrray          = columnsArrray.split(", ");
+        let columns            = {};
+        for (let column of columnsArrray) {
             column        = column.split(' ');
             const name    = column[0];
             const type    = column[1];

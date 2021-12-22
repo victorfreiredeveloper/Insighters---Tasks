@@ -1,14 +1,18 @@
-const statement =
-  "create table author (id number, name string, age number, city string, state string, country string)";
+// const statement =
+//   "create table author (id number, name string, age number, city string, state string, country string)";
 
-const regexp = /create table ([a-z]+) \((.+)\)/;
+const statement = "insert into author (id, name, age) values (1, Douglas Crockford, 62)";
+
+//const regexp = /insert into ([a-z]+) \((.+)\)/;
+const regexp = /insert into ([a-z]+) \((.+)\) values \((.+)\)/;
 
 const parsedStatement = statement.match(regexp);
 
-const tableName = parsedStatement[1];
-let columns = parsedStatement[2];
+console.log(parsedStatement);
+//const tableName = parsedStatement[1];
+//let columns = parsedStatement[2];
 
-columns = columns.split(", ");
+//columns = columns.split(", ");
 
-console.log(tableName);
-console.log(columns);
+//console.log(tableName);
+//console.log(columns);
